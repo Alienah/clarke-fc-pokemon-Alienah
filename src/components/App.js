@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Pokemon from './Pokemon';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    fetch('http://pokeapi.salestock.net/api/v2/pokemon/')
+    fetch('http://pokeapi.salestock.net/api/v2/pokemon?limit=25')
     .then(response => response.json())
 
     .then(json => {
@@ -42,9 +43,13 @@ class App extends React.Component {
       <ul>
         {
           listOfPokemons.map(
-            (pokemonItem) =>
-              <li key={pokemonItem.name}>
-                {pokemonItem.name}
+            (pokemon, index) =>
+              <li key={pokemon.name}>
+                {/* {pokemonItem.name}<a href={pokemonItem.url}>{pokemonItem.url}</a> */}
+                <Pokemon
+                  id={index+1}
+                  pokemon={pokemon}
+                />
               </li>
 
           )
