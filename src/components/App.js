@@ -14,16 +14,21 @@ class App extends React.Component {
     }
   }
 
-  // componentDidMount () {
-  //   fetch('http://pokeapi.salestock.net/api/v2/pokemon?limit=25')
-  //   .then(response => response.json())
-  //
-  //   .then(json => {
-  //     this.setState({
-  //       pokemons: json.results
-  //     })
-  //   })
-  // }
+  componentDidMount () {
+    for (let i = 1; i < 4; i++) {
+
+      fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
+      .then(response => response.json())
+
+      .then(json => {
+        this.setState({
+          pokemons: this.state.pokemons.concat([json])
+        })
+        // console.log(this.state.pokemons);
+      })
+    }
+
+  }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
@@ -43,12 +48,13 @@ class App extends React.Component {
       <ul className="pokemon__list">
         {
           listOfPokemons.map(
-            (pokemon, index) =>
+            (pokemon) =>
               <li key={pokemon.name}>
                 {/* {pokemonItem.name}<a href={pokemonItem.url}>{pokemonItem.url}</a> */}
                 <Pokemon
-                  id={index+1}
-                  pokemon={pokemon}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  // types={pokemon.types}
                 />
               </li>
 
@@ -59,7 +65,7 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.pokemons)
+    console.log(this.state.pokemons)
     return (
       <div className="App">
         <header className="App-header">
