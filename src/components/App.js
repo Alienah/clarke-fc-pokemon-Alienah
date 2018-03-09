@@ -14,16 +14,16 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount () {
-    fetch('http://pokeapi.salestock.net/api/v2/pokemon?limit=25')
-    .then(response => response.json())
-
-    .then(json => {
-      this.setState({
-        pokemons: json.results
-      })
-    })
-  }
+  // componentDidMount () {
+  //   fetch('http://pokeapi.salestock.net/api/v2/pokemon?limit=25')
+  //   .then(response => response.json())
+  //
+  //   .then(json => {
+  //     this.setState({
+  //       pokemons: json.results
+  //     })
+  //   })
+  // }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
@@ -37,10 +37,10 @@ class App extends React.Component {
 
   paintPokemons () {
     let listOfPokemons = this.state.pokemons;
-    console.log(listOfPokemons);
+    // console.log(listOfPokemons);
 
     return(
-      <ul>
+      <ul className="pokemon__list">
         {
           listOfPokemons.map(
             (pokemon, index) =>
@@ -69,7 +69,7 @@ class App extends React.Component {
           <p className="App-intro">
             Find your favorite Pokemon in our list.
           </p>
-          <input value={this.state.inputSearch} onChange={this.handleSearchInput}/>
+          <input className="App-search" value={this.state.inputSearch} onChange={this.handleSearchInput}/>
           {this.paintPokemons()}
         </main>
       </div>

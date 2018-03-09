@@ -6,10 +6,11 @@
 
 // layout
 
-// @import 'layout/header';
+@import 'layout/header';
 @import 'layout/index';
 
 
 // components
 
 @import 'components/app';
+@import 'components/pokemonCard';
