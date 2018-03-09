@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < 5; i++) {
 
       fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       .then(response => response.json())
@@ -47,14 +47,15 @@ class App extends React.Component {
     return(
       <ul className="pokemon__list">
         {
-          listOfPokemons.map(
+          listOfPokemons.sort((idNumber) => idNumber.id).map(
             (pokemon) =>
-              <li key={pokemon.name}>
+              <li key={pokemon.id}>
                 {/* {pokemonItem.name}<a href={pokemonItem.url}>{pokemonItem.url}</a> */}
                 <Pokemon
                   id={pokemon.id}
                   name={pokemon.name}
-                  // types={pokemon.types}
+                  types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
+
                 />
               </li>
 
