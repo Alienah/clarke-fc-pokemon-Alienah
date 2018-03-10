@@ -33,6 +33,9 @@
   font-size: 18px;
   color: $colorRed;
 }
+.pokemon__name::first-letter{
+  text-transform: capitalize;
+}
 .pokemon__types--list{
   padding: 0 0 8px 0;
   list-style: none;
@@ -45,7 +48,10 @@
   border: 1px solid $colorYellow;
   border-radius: 5px;
   padding: 5px;
-  color: $colorWhite
+  color: $colorWhite;
+  &::first-letter{
+    text-transform: capitalize;
+  }
 }
 .bug{
   background: $bug;

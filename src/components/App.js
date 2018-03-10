@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    for (let i = 1; i < 26; i++) {
+    for (let i = 1; i < 7; i++) {
       // fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
@@ -68,7 +68,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <header className="app-header">
-          <img className="logo" src={Logo}/>
+          <img className="logo" src={Logo} alt="logo"/>
           <h1 className="app-title">PokeDex</h1>
         </header>
         <main className="main">

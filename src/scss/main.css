@@ -134,6 +134,9 @@ body {
   font-size: 18px;
   color: #b34e3d; }
 
+.pokemon__name::first-letter {
+  text-transform: capitalize; }
+
 .pokemon__types--list {
   padding: 0 0 8px 0;
   list-style: none;
@@ -149,6 +152,8 @@ body {
   border-radius: 5px;
   padding: 5px;
   color: #ffffff; }
+  .pokemon__type::first-letter {
+    text-transform: capitalize; }
 
 .bug {
   background: #97a51d;
