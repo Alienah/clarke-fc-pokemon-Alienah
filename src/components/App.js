@@ -46,7 +46,8 @@ class App extends React.Component {
     return(
       <ul className="pokemon__list">
         {
-          listOfPokemons.sort((idNumber) => idNumber.id).map(
+          listOfPokemons.sort(function(a,b) {
+          return a.id - b.id;}).map(
             (pokemon) =>
               <li key={pokemon.id}>
                 <Pokemon
