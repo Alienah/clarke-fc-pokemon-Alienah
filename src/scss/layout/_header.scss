@@ -1,13 +1,26 @@
-.App-header {
-  background-color: #b34e3d;
+.app-header {
+  background-color: $colorRed;
   height: 70px;
   padding: 20px;
-  color: white;
+  color: $colorWhite;
+  display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.logo{
+  width: 50px;
+  height: 50px;
+  animation: logo-spin infinite 20s linear;
 }
 
-.App-title {
+.app-title {
   font-size: 1.5em;
+  text-align: center;
+  grid-column: 2 / 4;
   @media all and (min-width: 900px){
     font-size: 1.7em;
   }
+}
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
