@@ -1,6 +1,4 @@
 import React from 'react';
-import Image from './9.png';
-import Image2 from './010.png'
 
 class Pokemon extends React.Component{
   constructor(props){
