@@ -11,7 +11,6 @@ class Pokemon extends React.Component{
     }
   }
   render () {
-
     return (
         <div className="pokemon__container">
           <div className="pokemon__image--container">
@@ -22,13 +21,13 @@ class Pokemon extends React.Component{
 
             <ul className="pokemon__types--list">
               {this.props.types.map((type, index) =>
-                <li key={index} className="pokemon__type">
+                <li key={index} className={`pokemon__type ${type}`}>
                   {type}
                 </li>)}
             </ul>
           </div>
         </div>
-        
+
     );
   }
 }

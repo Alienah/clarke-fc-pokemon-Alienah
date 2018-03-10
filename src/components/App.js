@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 26; i++) {
       // fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
@@ -77,7 +77,6 @@ class App extends React.Component {
             </p>
             <input className="app-search" placeholder="Filter by name" value={this.state.inputSearch} onChange={this.handleSearchInput}/>
             {this.paintPokemons()}
-            {/* <Pokemon /> */}
           </div>
         </main>
       </div>
