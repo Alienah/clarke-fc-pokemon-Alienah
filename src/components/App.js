@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    for (let i = 1; i < 7; i++) {
+    for (let i = 1; i < 26; i++) {
       // fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
