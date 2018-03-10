@@ -17,7 +17,7 @@ class App extends React.Component {
 
   componentDidMount () {
     for (let i = 1; i < 26; i++) {
-      // fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
+      // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
 
@@ -27,13 +27,10 @@ class App extends React.Component {
         })
       })
     }
-
   }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
-
-    this.handleSearchInput = this.handleSearchInput.bind(this);
 
     this.setState({
       inputSearch: inputValue
@@ -54,7 +51,7 @@ class App extends React.Component {
                   id={pokemon.id}
                   name={pokemon.name}
                   types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
-                  imageSRC={pokemon.sprites.front_default}
+                  imageURL={pokemon.sprites.front_default}
                 />
               </li>
           )
