@@ -15,16 +15,15 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    for (let i = 1; i < 5; i++) {
-
+    for (let i = 1; i < 26; i++) {
       fetch(`http://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
+      // fetch(`http://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
 
       .then(json => {
         this.setState({
           pokemons: this.state.pokemons.concat([json])
         })
-        // console.log(this.state.pokemons);
       })
     }
 
@@ -41,8 +40,7 @@ class App extends React.Component {
   }
 
   paintPokemons () {
-    let listOfPokemons = this.state.pokemons;
-    // console.log(listOfPokemons);
+    let listOfPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.inputSearch));
 
     return(
       <ul className="pokemon__list">
@@ -50,15 +48,12 @@ class App extends React.Component {
           listOfPokemons.sort((idNumber) => idNumber.id).map(
             (pokemon) =>
               <li key={pokemon.id}>
-                {/* {pokemonItem.name}<a href={pokemonItem.url}>{pokemonItem.url}</a> */}
                 <Pokemon
                   id={pokemon.id}
                   name={pokemon.name}
                   types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
-
                 />
               </li>
-
           )
         }
       </ul>
@@ -70,13 +65,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">PokeList</h1>
+          <h1 className="App-title">PokeDex</h1>
         </header>
         <main>
           <p className="App-intro">
             Find your favorite Pokemon in our list.
           </p>
-          <input className="App-search" value={this.state.inputSearch} onChange={this.handleSearchInput}/>
+          <input className="App-search" placeholder="Filter by name" value={this.state.inputSearch} onChange={this.handleSearchInput}/>
           {this.paintPokemons()}
         </main>
       </div>
