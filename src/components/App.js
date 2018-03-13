@@ -20,7 +20,7 @@ class App extends React.Component {
     this.setState({
       loading: true
     })
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 26; i++) {
       // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
@@ -47,24 +47,38 @@ class App extends React.Component {
   paintPokemons () {
     let listOfPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.inputSearch));
 
-    return(
-      <ul className="pokemon__list">
-        {
-          listOfPokemons.sort(function(a,b) {
-          return a.id - b.id;}).map(
-            (pokemon) =>
-              <li key={pokemon.id}>
-                <Pokemon
-                  id={pokemon.id}
-                  name={pokemon.name}
-                  types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
-                  imageURL={pokemon.sprites.front_default}
-                />
-              </li>
-          )
-        }
-      </ul>
-    );
+    if(this.state.loading === true){
+      return(
+        <div className="loader"></div>
+      );
+    }
+    else if(listOfPokemons.length === 0){
+      return(
+      <div className="pokemon__results-message">
+        No hay resultados que coincidan con su búsqueda.
+      </div>)
+    }
+    else{
+      return(
+          <ul className="pokemon__list">
+            {
+              listOfPokemons.sort(function(a,b) {
+              return a.id - b.id;}).map(
+                (pokemon) =>
+                  <li key={pokemon.id}>
+                    <Pokemon
+                      id={pokemon.id}
+                      name={pokemon.name}
+                      types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
+                      imageURL={pokemon.sprites.front_default}
+                    />
+                  </li>
+              )
+            }
+          </ul>
+
+      );
+    }
   }
 
   render() {

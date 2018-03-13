@@ -59,7 +59,10 @@ body {
 
 .main__inside {
   z-index: 2;
-  position: relative; }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
 
 .app-intro {
   font-size: large;
@@ -76,6 +79,27 @@ body {
   border: 1px solid rgba(226, 215, 215, 0.9);
   padding: 0 4px;
   text-align: center; }
+
+.loader {
+  margin: 50px;
+  border: 16px solid #f3f3f3;
+  /* Light grey */
+  border-top: 16px solid #3498db;
+  /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite; }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.pokemon__results-message {
+  padding: 30px;
+  font-weight: bold; }
 
 .pokemon__list {
   list-style: none;
