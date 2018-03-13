@@ -11,20 +11,27 @@ class App extends React.Component {
 
     this.state = {
       pokemons: [],
-      inputSearch: ""
+      inputSearch: "",
+      loading: false
     }
   }
 
   componentDidMount () {
-    for (let i = 1; i < 26; i++) {
+    this.setState({
+      loading: true
+    })
+    for (let i = 1; i < 6; i++) {
       // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
       fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
       .then(response => response.json())
 
       .then(json => {
         this.setState({
-          pokemons: this.state.pokemons.concat([json])
+          pokemons: this.state.pokemons.concat([json]),
+          loading: false
         })
+      }).catch(() =>{
+        alert('No es posible recuperar los datos actualmente. Vuelva a intentarlo más tarde.')
       })
     }
   }
