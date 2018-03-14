@@ -20,21 +20,48 @@ class App extends React.Component {
     this.setState({
       loading: true
     })
-    for (let i = 1; i < 26; i++) {
-      // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
-      fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-      .then(response => response.json())
 
-      .then(json => {
-        this.setState({
-          pokemons: this.state.pokemons.concat([json]),
-          loading: false
-        })
-      }).catch(() =>{
-        alert('No es posible recuperar los datos actualmente. Vuelva a intentarlo más tarde.')
-      })
-    }
+    // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=2`, {
+      method: 'get'
+    })
+    .then(response => response.json())
+    .then(firstList => {
+      this.handleResponse(firstList);
+    })
   }
+  
+  //Uso el json transformado del fetch en componentDidMount y lo uso como parámetro para esta función y así obtengo con un mapeo de results, las url
+  handleResponse(firstList){
+    const getAllPokeDatas = firstList.results.map(poke => this.getPokemonByUrl(poke.url));
+    console.log(getAllPokeDatas);
+  }
+
+  //Preparo la llamada a la url de cada pokemon para ejecutarla cuando tenga el valor del parámetro e introduzco posteriomente los valores en elarray de pokemons
+  getPokemonByUrl(url) {
+    fetch(url)
+    .then(response => response.json())
+    .then(pokeResponse => {
+      console.log(pokeResponse);
+      this.setState({
+        pokemons: this.state.pokemons.concat([pokeResponse]),
+        loading: false
+      });
+      console.log(this.state.pokemons);
+    })
+    .catch((err) =>{
+        alert('No es posible recuperar los datos actualmente. Vuelva a intentarlo más tarde.');
+        console.error(err);
+      })
+  }
+
+  // getEvolution() {
+  //   fetch(`https://pokeapi.co/api/v2/evolution-chain/${i}/`)
+  //   .then(response => response.json())
+  //   .then(evolutionJson => {
+  //
+  //   })
+  // }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
@@ -82,7 +109,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.pokemons)
+    // console.log(this.state.pokemons)
     return (
       <div className="app">
         <header className="app-header">
