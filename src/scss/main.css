@@ -258,3 +258,13 @@ body {
   flex-direction: row;
   justify-content: space-around;
   align-items: center; }
+
+.pokemon-evolves-from {
+  font-size: 13px;
+  color: grey; }
+
+.evolves-from--value {
+  font-weight: bold;
+  color: green; }
+  .evolves-from--value::first-letter {
+    text-transform: capitalize; }
