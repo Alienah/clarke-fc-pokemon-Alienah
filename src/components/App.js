@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       pokemons: [],
       inputSearch: "",
+      evolution: [],
       loading: false
     }
   }
@@ -30,11 +31,10 @@ class App extends React.Component {
       this.handleResponse(firstList);
     })
   }
-  
+
   //Uso el json transformado del fetch en componentDidMount y lo uso como parámetro para esta función y así obtengo con un mapeo de results, las url
   handleResponse(firstList){
     const getAllPokeDatas = firstList.results.map(poke => this.getPokemonByUrl(poke.url));
-    console.log(getAllPokeDatas);
   }
 
   //Preparo la llamada a la url de cada pokemon para ejecutarla cuando tenga el valor del parámetro e introduzco posteriomente los valores en elarray de pokemons
@@ -42,7 +42,9 @@ class App extends React.Component {
     fetch(url)
     .then(response => response.json())
     .then(pokeResponse => {
-      console.log(pokeResponse);
+      //Ejecuto la función para acceder a la url de la evolucion de cada pokemon con el parámetro id
+      this.getEvolution(pokeResponse.id);
+
       this.setState({
         pokemons: this.state.pokemons.concat([pokeResponse]),
         loading: false
@@ -55,13 +57,21 @@ class App extends React.Component {
       })
   }
 
-  // getEvolution() {
-  //   fetch(`https://pokeapi.co/api/v2/evolution-chain/${i}/`)
-  //   .then(response => response.json())
-  //   .then(evolutionJson => {
-  //
-  //   })
-  // }
+  getEvolution(id) {
+     fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+     .then(response => response.json())
+     .then(evolutionJson => {
+       const pokemonsArray = this.state.pokemons;
+
+      //Introducimos una nueva propiedad "evolution" en cada objeto
+       pokemonsArray.map((poke) => {
+         if(poke.id === evolutionJson.id){
+           poke["evolution"] = evolutionJson.chain;
+         };
+
+       });
+     })
+   }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
