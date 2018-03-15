@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Pokemon extends React.Component{
-  
+
   render () {
     return (
       <div className="pokemon__container">
@@ -16,6 +16,7 @@ class Pokemon extends React.Component{
                 {type}
               </li>)}
           </ul>
+          {this.props.evolves_from}
         </div>
       </div>
     );

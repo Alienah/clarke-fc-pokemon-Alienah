@@ -125,3 +125,22 @@
   background: $water;
   border: 1px solid $water;
 }
+
+.pokemon__evolves{
+  padding: 10px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.pokemon-evolves-from{
+  font-size: 13px;
+  color: grey;
+}
+.evolves-from--value{
+  font-weight: bold;
+  color: green;
+  &::first-letter{
+    text-transform: capitalize;
+  }
+}

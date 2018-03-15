@@ -8,6 +8,7 @@ class App extends React.Component {
     super(props);
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
+    this.handleEvolution = this.handleEvolution.bind(this);
 
     this.state = {
       pokemons: [],
@@ -22,7 +23,7 @@ class App extends React.Component {
       loading: true
     })
 
-    // fetch(`https://pokeapi.salestock.net/api/v2/pokemon/${i}/`)
+    // fetch(`https://pokeapi.salestock.net/api/v2/pokemon?limit=2`)
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=2`, {
       method: 'get'
     })
@@ -44,7 +45,6 @@ class App extends React.Component {
     .then(pokeResponse => {
       //Ejecuto la función para acceder a la url de la evolucion de cada pokemon con el parámetro id
       this.getEvolution(pokeResponse.id);
-
       this.setState({
         pokemons: this.state.pokemons.concat([pokeResponse]),
         loading: false
@@ -58,18 +58,22 @@ class App extends React.Component {
   }
 
   getEvolution(id) {
-     fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+    // fetch(`http://pokeapi.salestock.net/api/v2/pokemon-species/${id}/`)
+     fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
      .then(response => response.json())
-     .then(evolutionJson => {
+     .then(speciesJson => {
        const pokemonsArray = this.state.pokemons;
 
       //Introducimos una nueva propiedad "evolution" en cada objeto
        pokemonsArray.map((poke) => {
-         if(poke.id === evolutionJson.id){
-           poke["evolution"] = evolutionJson.chain;
+         if(poke.id === speciesJson.id){
+           poke["species"] = speciesJson;
          };
-
+         this.setState({
+           pokemons: pokemonsArray
+         })
        });
+
      })
    }
 
@@ -79,6 +83,19 @@ class App extends React.Component {
     this.setState({
       inputSearch: inputValue
     })
+  }
+
+  //Condición para que sólo devuelva el que evoluciona de otro pokemon
+  handleEvolution (pokemon){
+    if (pokemon.species.evolves_from_species != null) {
+      return (
+        <div className="pokemon__evolves"><span className="pokemon-evolves-from">Evolves from </span> <span className="evolves-from--value">{pokemon.species.evolves_from_species.name}</span>
+        </div>
+      )
+    }
+    else {
+      return ('')
+    }
   }
 
   paintPokemons () {
@@ -108,12 +125,12 @@ class App extends React.Component {
                       name={pokemon.name}
                       types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
                       imageURL={pokemon.sprites.front_default}
+                      evolves_from={this.handleEvolution(pokemon)}
                     />
                   </li>
               )
             }
           </ul>
-
       );
     }
   }

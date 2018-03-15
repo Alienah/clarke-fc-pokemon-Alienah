@@ -251,3 +251,10 @@ body {
 .water {
   background: #4578ed;
   border: 1px solid #4578ed; }
+
+.pokemon__evolves {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
