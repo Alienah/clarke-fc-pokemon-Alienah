@@ -16,6 +16,16 @@
   width: 130px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+  background-color: inherit;
+  border-width: 0;
+  border-style: none;
+	// overflow: hidden;
+	// border-radius: 50%;
+
 }
 .pokemon__data{
   width: 200px;

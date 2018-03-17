@@ -1,7 +1,6 @@
 import React from 'react';
 import Pokemon from './Pokemon';
 
-
 class Home extends React.Component{
 
   //Condición para que sólo devuelva el que evoluciona de otro pokemon
@@ -45,7 +44,9 @@ class Home extends React.Component{
                       types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
                       imageURL={pokemon.sprites.front_default}
                       evolves_from={this.handleEvolution(pokemon)}
+                      handleOnClickPokemon={this.props.handleOnClickPokemon}
                     />
+
                   </li>
               )
             }

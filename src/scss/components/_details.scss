@@ -1,0 +1,10 @@
+.details__container{
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.details__list{
+  list-style: none;
+}

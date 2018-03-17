@@ -11,13 +11,17 @@ class App extends React.Component {
     super(props);
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
+    this.handleOnClickPokemon = this.handleOnClickPokemon.bind(this);
     // this.handleEvolution = this.handleEvolution.bind(this);
 
     this.state = {
       pokemons: [],
       inputSearch: "",
       evolution: [],
-      loading: false
+      loading: false,
+      clickValue: "",
+      pokemon: {}
+
     }
   }
 
@@ -88,18 +92,27 @@ class App extends React.Component {
     })
   }
 
-  // //Condición para que sólo devuelva el que evoluciona de otro pokemon
-  // handleEvolution (pokemon){
-  //   if (pokemon.species.evolves_from_species != null) {
-  //     return (
-  //       <div className="pokemon__evolves"><span className="pokemon-evolves-from">Evolves from </span> <span className="evolves-from--value">{pokemon.species.evolves_from_species.name}</span>
-  //       </div>
-  //     )
-  //   }
-  //   else {
-  //     return ('')
-  //   }
-  // }
+  handleOnClickPokemon (e) {
+    const clickValue = e.target.value;
+    let pokemonFiltered = this.state.pokemons.filter(pokemon =>
+      pokemon.id == clickValue);
+    this.setState({
+      pokemon: pokemonFiltered
+    })
+  }
+
+  //Condición para que sólo devuelva el que evoluciona de otro pokemon
+  handleEvolution (pokemon){
+    if (pokemon.species.evolves_from_species != null) {
+      return (
+        <div className="pokemon__evolves"><span className="pokemon-evolves-from">Evolves from </span> <span className="evolves-from--value">{pokemon.species.evolves_from_species.name}</span>
+        </div>
+      )
+    }
+    else {
+      return ('')
+    }
+  }
 
   // paintPokemons () {
   //   let listOfPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.inputSearch));
@@ -140,6 +153,7 @@ class App extends React.Component {
 
   render() {
     // console.log(this.state.pokemons)
+
     return (
       <div className="app">
         <header className="app-header">
@@ -148,9 +162,10 @@ class App extends React.Component {
           <nav>
 						<ul className="menu__list">
 							<li><Link className="item-link" to='/'>Home</Link></li>
-							<li><Link className="item-link" to='/details'>Details</Link></li>
+							{/* <li><Link className="item-link" to='/details'>Details</Link></li> */}
 						</ul>
 					</nav>
+          {/* {this.getOnePokemon()} */}
         </header>
         <main className="main">
           <Switch>
@@ -161,16 +176,20 @@ class App extends React.Component {
                 loading = {this.state.loading}
                 inputSearch = {this.state.inputSearch}
                 handleSearchInput = {this.handleSearchInput}
+                handleOnClickPokemon = {this.handleOnClickPokemon}
 
               />
-            }/> />
+            }/>
             <Route path='/details' render={() =>
               <Details
-                // id={pokemon.id}
-                // name={pokemon.name}
-                // types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
-                // imageURL={pokemon.sprites.front_default}
-                // evolves_from={this.handleEvolution(pokemon)}
+                paintDetails = {this.paintDetails}
+                pokemons = {this.state.pokemons}
+                loading = {this.state.loading}
+                clickValue = {this.state.clickValue}
+                pokemon = {this.state.pokemon}
+
+                // inputSearch = {this.state.inputSearch}
+                // handleSearchInput = {this.handleSearchInput}
               />
             }/>
           </Switch>
