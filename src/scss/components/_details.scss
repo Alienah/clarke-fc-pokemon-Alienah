@@ -1,5 +1,18 @@
 .details__outside{
-    overflow: hidden;
+  overflow: hidden;
+}
+.btnclose{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 30px;
+  width: 30px;
+  border: none;
+  background-color: inherit;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
 }
 .details__container{
   z-index: 2;
@@ -44,10 +57,15 @@
 }
 .abilities__list{
   list-style: none;
-  padding: 0 45px 0 8px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  // padding: 0 45px 0 8px;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  li{
+    font-weight: normal;
+    font-size: 16px;
+    text-transform: capitalize;
+  }
 }
 .delails__image--container{
   display: grid;

@@ -114,43 +114,6 @@ class App extends React.Component {
     }
   }
 
-  // paintPokemons () {
-  //   let listOfPokemons = this.state.pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.inputSearch));
-  //
-  //   if(this.state.loading === true){
-  //     return(
-  //       <div className="loader"></div>
-  //     );
-  //   }
-  //   else if(listOfPokemons.length === 0){
-  //     return(
-  //     <div className="pokemon__results-message">
-  //       No hay resultados que coincidan con su búsqueda.
-  //     </div>)
-  //   }
-  //   else{
-  //     return(
-  //         <ul className="pokemon__list">
-  //           {
-  //             listOfPokemons.sort(function(a,b) {
-  //             return a.id - b.id;}).map(
-  //               (pokemon) =>
-  //                 <li key={pokemon.id}>
-  //                   <Pokemon
-  //                     id={pokemon.id}
-  //                     name={pokemon.name}
-  //                     types= {pokemon.types.sort((typeNumber) => typeNumber.slot).map((typeNumber) => typeNumber.type.name)}
-  //                     imageURL={pokemon.sprites.front_default}
-  //                     evolves_from={this.handleEvolution(pokemon)}
-  //                   />
-  //                 </li>
-  //             )
-  //           }
-  //         </ul>
-  //     );
-  //   }
-  // }
-
   render() {
     // console.log(this.state.pokemons)
 
@@ -159,13 +122,6 @@ class App extends React.Component {
         <header className="app-header">
           <img className="logo" src={Logo} alt="logo"/>
           <h1 className="app-title">PokeDex</h1>
-          <nav>
-						<ul className="menu__list">
-							<li><Link className="item-link" to='/'>Home</Link></li>
-							{/* <li><Link className="item-link" to='/details'>Details</Link></li> */}
-						</ul>
-					</nav>
-          {/* {this.getOnePokemon()} */}
         </header>
         <main className="main">
           <Switch>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import CloseButton from './../images/closebtn.png';
 
 class Details extends React.Component{
 
@@ -10,6 +12,7 @@ class Details extends React.Component{
 
           <div className="details__title-container">
             <h2 className="pokemon__title"><span className="pokemon__number">Nº {this.props.pokemon[0].id}</span> <span className="pokemon__name">{this.props.pokemon[0].name}</span></h2>
+            <Link className="item-link" to='/'><button className="btnclose" style={{ backgroundImage: `url(${CloseButton})` }}></button></Link>
           </div>
           <ul className="pokemon__types--list">
 
@@ -23,8 +26,8 @@ class Details extends React.Component{
             <ul className="details__list">
               <li className="details__list-item"><span className="details__key">Height:</span> <span className="details__value">{this.props.pokemon[0].height}</span></li>
               <li className="details__list-item"><span className="details__key">Weight:</span> <span className="details__value">{this.props.pokemon[0].weight}</span></li>
-              <li className="details__key">Abilities
-                <ul className="details__key abilities__list">:
+              <li className="details__list-item details__key">Abilities:
+                <ul className="abilities__list">
                   {this.props.pokemon[0].abilities.sort((abilityEntry) => abilityEntry.slot).map((abilityEntry) => abilityEntry.ability.name).map((ability, index) =>
                     <li className="details__value" key={index} className={` ${ability}`}>
                       {ability}
