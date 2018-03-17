@@ -1,9 +1,8 @@
 import React from 'react';
 import './../scss/main.css';
-// import Pokemon from './Pokemon';
 import Logo from './../images/logo.png';
 import Details from './Details';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 
 class App extends React.Component {
@@ -12,16 +11,13 @@ class App extends React.Component {
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleOnClickPokemon = this.handleOnClickPokemon.bind(this);
-    // this.handleEvolution = this.handleEvolution.bind(this);
 
     this.state = {
       pokemons: [],
       inputSearch: "",
-      evolution: [],
       loading: false,
       clickValue: "",
       pokemon: {}
-
     }
   }
 
@@ -31,7 +27,7 @@ class App extends React.Component {
     })
 
     // fetch(`https://pokeapi.salestock.net/api/v2/pokemon?limit=2`)
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=2`, {
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=9`, {
       method: 'get'
     })
     .then(response => response.json())
@@ -56,7 +52,6 @@ class App extends React.Component {
         pokemons: this.state.pokemons.concat([pokeResponse]),
         loading: false
       });
-      console.log(this.state.pokemons);
     })
     .catch((err) =>{
         alert('No es posible recuperar los datos actualmente. Vuelva a intentarlo más tarde.');
@@ -71,7 +66,7 @@ class App extends React.Component {
      .then(speciesJson => {
        const pokemonsArray = this.state.pokemons;
 
-      //Introducimos una nueva propiedad "evolution" en cada objeto
+      //Introducimos una nueva propiedad "species" en cada objeto
        pokemonsArray.map((poke) => {
          if(poke.id === speciesJson.id){
            poke["species"] = speciesJson;
@@ -80,13 +75,26 @@ class App extends React.Component {
            pokemons: pokemonsArray
          })
        });
+       return fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+     })
+     .then(response => response.json())
+     .then(evolutionChainJson => {
+       const pokemonsArray = this.state.pokemons;
 
+      //Introducimos una nueva propiedad "evolution" en cada objeto
+       pokemonsArray.map((poke) => {
+         if(poke.species.evolution_chain.url === `https://pokeapi.co/api/v2/evolution-chain/${id}/`){
+           poke["evolution"] = evolutionChainJson;
+         };
+         this.setState({
+           pokemons: pokemonsArray
+         })
+       });
      })
    }
 
   handleSearchInput (e) {
     const inputValue = e.target.value.toLowerCase();
-
     this.setState({
       inputSearch: inputValue
     })
@@ -115,8 +123,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.pokemons)
-
     return (
       <div className="app">
         <header className="app-header">
@@ -133,29 +139,16 @@ class App extends React.Component {
                 inputSearch = {this.state.inputSearch}
                 handleSearchInput = {this.handleSearchInput}
                 handleOnClickPokemon = {this.handleOnClickPokemon}
-
               />
             }/>
             <Route path='/details' render={() =>
               <Details
                 paintDetails = {this.paintDetails}
                 pokemons = {this.state.pokemons}
-                loading = {this.state.loading}
-                clickValue = {this.state.clickValue}
                 pokemon = {this.state.pokemon}
-
-                // inputSearch = {this.state.inputSearch}
-                // handleSearchInput = {this.handleSearchInput}
               />
             }/>
           </Switch>
-          {/* <div className="main__inside">
-            <p className="app-intro">
-              Find your favorite Pokemon in our list.
-            </p>
-            <input className="app-search" placeholder="Filter by name" value={this.state.inputSearch} onChange={this.handleSearchInput}/>
-            {this.paintPokemons()}
-          </div> */}
         </main>
       </div>
     );

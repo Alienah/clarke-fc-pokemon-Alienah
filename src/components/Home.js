@@ -7,7 +7,7 @@ class Home extends React.Component{
   handleEvolution (pokemon){
     if (pokemon.species.evolves_from_species != null) {
       return (
-        <div className="pokemon__evolves"><span className="pokemon-evolves-from">Evolves from </span> <span className="evolves-from--value">{pokemon.species.evolves_from_species.name}</span>
+        <div className="pokemon__evolves"><span className="pokemon-evolves-from">Evolves from  </span> <span className="evolves-from--value"> {pokemon.species.evolves_from_species.name}</span>
         </div>
       )
     }
@@ -46,7 +46,6 @@ class Home extends React.Component{
                       evolves_from={this.handleEvolution(pokemon)}
                       handleOnClickPokemon={this.props.handleOnClickPokemon}
                     />
-
                   </li>
               )
             }
@@ -58,7 +57,6 @@ class Home extends React.Component{
   render (){
     return (
        <div className="main__inside">
-
          <p className="app-intro">
            Find your favorite Pokemon in our list.
          </p>

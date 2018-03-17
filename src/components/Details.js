@@ -48,6 +48,26 @@ class Details extends React.Component{
                 <img src={this.props.pokemon[0].sprites.back_shiny_female} alt="back_shiny_female" className={this.props.pokemon[0].sprites.back_shiny_female ? 'visible' : 'invisible'}/>
               </div>
             </div>
+            <div className="delails__evolution--container">
+              <h3 className="details__subtitle">EVOLUTION CHAIN</h3>
+              <div className="evolution--section">
+                <span className="evolution--name">{this.props.pokemon[0].evolution.chain.species.name}</span> evolves to
+                <span className="evolution--name">{this.props.pokemon[0].evolution.chain.evolves_to[0].species.name}</span>
+                <div>
+                  at level
+                  <span>{this.props.pokemon[0].evolution.chain.evolves_to[0].evolution_details[0].min_level}</span>
+                </div>
+              </div>
+              <div className="evolution--section">
+                <span className="evolution--name">{this.props.pokemon[0].evolution.chain.evolves_to[0].species.name}</span>
+                evolves to
+                <span className="evolution--name">{this.props.pokemon[0].evolution.chain.evolves_to[0].evolves_to[0].species.name}</span>
+                <div>
+                  at level
+                  <span>{this.props.pokemon[0].evolution.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level}</span>
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
