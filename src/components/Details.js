@@ -3,8 +3,22 @@ import { Link } from 'react-router-dom';
 import CloseButton from './../images/closebtn.png';
 
 class Details extends React.Component{
+  componentDidMount(){
+    this.props.pokemon ? this.props.pokemon.id : '' ;
+  }
 
   render () {
+    if (this.props.pokemon[0] == undefined) {
+      return(
+        <div className="details__outside">
+          <div className="details__container error-msg">
+            <div className="details-not-found--msg">We can't show you the details of this Pokémon right now, please come back to Home and click on another Pokémon from the list.</div>
+            <Link className="item-link" to='/'><button className="btnclose" style={{ backgroundImage: `url(${CloseButton})` }}></button></Link>
+          </div>
+        </div>
+          );
+    } else {
+
     return (
       <div className="details__outside">
         <div className="details__container">
@@ -71,7 +85,7 @@ class Details extends React.Component{
 
         </div>
       </div>
-    );
+    );}
   }
 }
 

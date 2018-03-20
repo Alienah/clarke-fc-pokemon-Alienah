@@ -28,6 +28,12 @@
     padding: 0;
     width: 150px;
   }
+  &.error-msg{
+    padding-bottom: 0;
+  }
+}
+.details-not-found--msg{
+  padding: 10px 40px;
 }
 .details__title-container{
   width: 100%;

@@ -303,6 +303,11 @@ body {
   .details__container .pokemon__types--list {
     padding: 0;
     width: 150px; }
+  .details__container.error-msg {
+    padding-bottom: 0; }
+
+.details-not-found--msg {
+  padding: 10px 40px; }
 
 .details__title-container {
   width: 100%;
