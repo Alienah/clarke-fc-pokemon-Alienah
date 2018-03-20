@@ -127,7 +127,7 @@ class App extends React.Component {
       <div className="app">
         <header className="app-header">
           <img className="logo" src={Logo} alt="logo"/>
-          <h1 className="app-title">PokeDex</h1>
+          <h1 className="app-title">PokéDex</h1>
         </header>
         <main className="main">
           <Switch>
@@ -141,11 +141,11 @@ class App extends React.Component {
                 handleOnClickPokemon = {this.handleOnClickPokemon}
               />
             }/>
-            <Route path='/details' render={() =>
+            <Route path='/details/:id' render={(props) =>
               <Details
                 paintDetails = {this.paintDetails}
                 pokemons = {this.state.pokemons}
-                pokemon = {this.state.pokemon}
+                pokemon = {this.state.pokemons.filter(pokemon => pokemon.id == props.match.params.id)}
               />
             }/>
           </Switch>

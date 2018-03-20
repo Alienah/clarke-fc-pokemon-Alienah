@@ -58,7 +58,7 @@ class Home extends React.Component{
     return (
        <div className="main__inside">
          <p className="app-intro">
-           Find your favorite Pokemon in our list.
+           Find your favorite Pokémon in our list.
          </p>
          <input className="app-search" placeholder="Filter by name" value={this.props.inputSearch} onChange={this.props.handleSearchInput}/>
          {this.paintPokemons()}
