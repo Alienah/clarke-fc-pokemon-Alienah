@@ -47,7 +47,7 @@ class App extends React.Component {
       this.getEvolution(pokeResponse.id);
       this.setState({
         pokemons: this.state.pokemons.concat([pokeResponse]),
-        loading: false
+        loading: true
       });
     })
     .catch((err) =>{
@@ -69,7 +69,8 @@ class App extends React.Component {
            poke["species"] = speciesJson;
          };
          this.setState({
-           pokemons: pokemonsArray
+           pokemons: pokemonsArray,
+           loading: true
          })
        });
        return fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
@@ -84,7 +85,8 @@ class App extends React.Component {
            poke["evolution"] = evolutionChainJson;
          };
          this.setState({
-           pokemons: pokemonsArray
+           pokemons: pokemonsArray,
+           loading: false
          })
        });
      })
