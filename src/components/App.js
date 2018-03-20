@@ -10,14 +10,11 @@ class App extends React.Component {
     super(props);
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.handleOnClickPokemon = this.handleOnClickPokemon.bind(this);
 
     this.state = {
       pokemons: [],
       inputSearch: "",
       loading: false,
-      clickValue: "",
-      pokemon: {}
     }
   }
 
@@ -100,15 +97,6 @@ class App extends React.Component {
     })
   }
 
-  handleOnClickPokemon (e) {
-    const clickValue = e.target.value;
-    let pokemonFiltered = this.state.pokemons.filter(pokemon =>
-      pokemon.id == clickValue);
-    this.setState({
-      pokemon: pokemonFiltered
-    })
-  }
-
   //Condición para que sólo devuelva el que evoluciona de otro pokemon
   handleEvolution (pokemon){
     if (pokemon.species.evolves_from_species != null) {
@@ -138,7 +126,6 @@ class App extends React.Component {
                 loading = {this.state.loading}
                 inputSearch = {this.state.inputSearch}
                 handleSearchInput = {this.handleSearchInput}
-                handleOnClickPokemon = {this.handleOnClickPokemon}
               />
             }/>
             <Route path='/details/:id' render={(props) =>
