@@ -8,7 +8,7 @@ class Pokemon extends React.Component{
       <div>
         <div className="pokemon__container">
           <div className="pokemon__image--container">
-            <Link className="item-link" to={`/details/:${this.props.id}`}><div className="pokemon__image" style={{backgroundImage: `url(${this.props.imageURL})`}}></div>
+            <Link className="item-link" to={`/details/${this.props.id}`}><div className="pokemon__image" style={{backgroundImage: `url(${this.props.imageURL})`}}></div>
               {/* <button className="pokemon__image" value={this.props.id} onClick={this.props.handleOnClickPokemon} style={{backgroundImage: `url(${this.props.imageURL})`}}>
               </button> */}
             </Link>
